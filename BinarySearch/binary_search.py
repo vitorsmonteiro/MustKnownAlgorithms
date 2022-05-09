@@ -1,4 +1,6 @@
 import random
+import time
+import matplotlib.pyplot as plt
 
 def generate_list(n_items: int) -> list:
     """
@@ -36,10 +38,21 @@ def binary_search(ordered_list: list, target: int):
     
 
 if __name__ == '__main__':
-    list_size = 100
-    ordered_list = generate_list(list_size)
-    target = int(100*random.random())
-    print(f"Ordered_list = {ordered_list}")
-    print(f"Target = {target}")
-    idx = binary_search(ordered_list, target)
-    print(idx if idx else "Target not found")
+    times = []
+    n = []
+    for i in range(100,10000):
+        list_size = i
+        ordered_list = generate_list(list_size)
+        target = int(100*random.random())
+        start_time = time.time()
+        idx = binary_search(ordered_list, target)
+        end_time =time.time()
+        times.append(end_time - start_time)
+        n.append(i)
+        print(idx if idx else "Target not found")
+
+    plt.plot(n, times)
+    plt.xlabel('List size')
+    plt.ylabel('Time')
+    plt.title('Linear Complexity')
+    plt.show()
