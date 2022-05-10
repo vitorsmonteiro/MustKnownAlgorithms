@@ -1,5 +1,6 @@
 import random
 
+
 def generate_list(n_items: int) -> list:
     """
     Generate a ordered list of size n_items with random integers from 0 to 100 
