@@ -15,24 +15,34 @@ def generate_list(n_items: int) -> list:
     
     return sorted(res)
 
-def binary_search(ordered_list: list, target: int):
+def binary_search(ordered_list: list, target: int, start_idx=None, end_idx=None):
+    """
+    Recursive binary search function
+
+    Args:
+        ordered_list (list): Ordered list where a target is to be found
+        target (int): target value to be found in the ordered list
+        start_idx (int, optional): Start index for binary search, only used to make this recursive. Defaults to None.
+        end_idx (int, optional): End index for binary search, only used to make this recursive. Defaults to None.
+
+    Returns:
+        int or False: return False if target value does not exist in list. If target exists in list this will return the index of the 
+        target value in list
+    """
     
-    list_size = len(ordered_list)
-    middle_idx = list_size // 2
-    idx = 0
+    start_idx = start_idx or 0
+    end_idx = end_idx if end_idx is not None else len(ordered_list)
     
-    while middle_idx > 0:   
-        list_size = len(ordered_list)
-        middle_idx = list_size // 2
-        if target == ordered_list[middle_idx]:
-            return idx + middle_idx
-        elif target < ordered_list[middle_idx]:
-            ordered_list = ordered_list[: middle_idx]
-        else:
-            ordered_list = ordered_list[middle_idx :]
-            idx = idx + middle_idx
+    middle_idx = (end_idx + start_idx) // 2
     
-    return False
+    if start_idx == end_idx:
+        return False
+    if target == ordered_list[middle_idx]:
+        return middle_idx
+    elif target < ordered_list[middle_idx]:
+        return binary_search(ordered_list, target, start_idx, middle_idx)
+    else:
+        return binary_search(ordered_list, target, middle_idx+1, end_idx)
     
 
 if __name__ == '__main__':
