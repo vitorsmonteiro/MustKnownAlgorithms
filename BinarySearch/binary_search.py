@@ -31,7 +31,7 @@ def binary_search(ordered_list: list, target: int, start_idx=None, end_idx=None)
     """
     
     start_idx = start_idx or 0
-    end_idx = end_idx if end_idx is not None else len(ordered_list)
+    end_idx = end_idx if end_idx is not None else len(ordered_list) - 1
     
     middle_idx = (end_idx + start_idx) // 2
     
@@ -52,9 +52,7 @@ if __name__ == '__main__':
     # Input
     list_size = 100  # Size of list to be generated
     target = int(100*random.random())  # target value to be found. Generated randomly here
-    
     ordered_list = generate_list(list_size)
-
     print(f"Ordered_list = {ordered_list}")
     print(f"Target = {target}")
     idx = binary_search(ordered_list, target)
